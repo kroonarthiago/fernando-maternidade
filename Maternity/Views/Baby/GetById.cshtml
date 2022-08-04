@@ -1,0 +1,52 @@
+﻿@using Maternity.Models
+@model BabyModel
+@{
+    ViewBag.Title = "GetById ";
+}
+
+@if (Model.Id == -1)
+{
+    <h2>Not Found</h2>
+}
+else
+{
+    <h1>Baby</h1>
+    <h3>Id = @Model.Id</h3>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>BirthDate</th>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Mother</th>
+                <th>Doctors</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.Name</td>
+                <td>@Model.BirthDate.ToShortDateString()</td>
+                <td>@Model.Weight.ToString().TrimEnd('0')</td>
+                <td>@Model.Height.ToString().TrimEnd('0')</td>
+                <td>@Html.ActionLink(Model.MotherId.ToString(), "GetById", "Mother", new { Id = Model.MotherId }, new { @class = "" })</td>
+                <td>
+                    @foreach (var i in Model.DoctorList)
+                    {
+                        @Html.ActionLink(i.ToString(), "GetById", "Doctor", new { Id = i }, new { @class = "" })
+                        <span>&nbsp;</span>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "AddUpdate", "Baby", new { Id = Model.Id }, new { @class = "btn btn-default" }) &nbsp; &nbsp;
+                    @Html.ActionLink("Remove", "Remove", "Baby", new { Id = Model.Id }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+}

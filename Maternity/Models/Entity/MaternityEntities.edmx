@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MaternityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Baby">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="20" Scale="8" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="Height" Type="decimal" Precision="20" Scale="8" Nullable="false" />
+          <Property Name="MotherId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Baby_Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BabyId" Type="int" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Crm" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Specialty" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mother">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="StreetName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="HouseNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Baby_Doctor_Baby">
+          <End Role="Baby" Type="Self.Baby" Multiplicity="1" />
+          <End Role="Baby_Doctor" Type="Self.Baby_Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Baby">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Baby_Doctor">
+              <PropertyRef Name="BabyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Baby_Doctor_Doctor1">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Baby_Doctor" Type="Self.Baby_Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Baby_Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Baby_Mother1">
+          <End Role="Mother" Type="Self.Mother" Multiplicity="1" />
+          <End Role="Baby" Type="Self.Baby" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mother">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Baby">
+              <PropertyRef Name="MotherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MaternityModelStoreContainer">
+          <EntitySet Name="Baby" EntityType="Self.Baby" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Baby_Doctor" EntityType="Self.Baby_Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mother" EntityType="Self.Mother" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Baby_Doctor_Baby" Association="Self.FK_Baby_Doctor_Baby">
+            <End Role="Baby" EntitySet="Baby" />
+            <End Role="Baby_Doctor" EntitySet="Baby_Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Baby_Doctor_Doctor1" Association="Self.FK_Baby_Doctor_Doctor1">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Baby_Doctor" EntitySet="Baby_Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Baby_Mother1" Association="Self.FK_Baby_Mother1">
+            <End Role="Mother" EntitySet="Mother" />
+            <End Role="Baby" EntitySet="Baby" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MaternityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Baby">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Weight" Type="Decimal" Precision="20" Scale="8" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Height" Type="Decimal" Precision="20" Scale="8" Nullable="false" />
+          <Property Name="MotherId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Baby_Doctor" Relationship="Self.FK_Baby_Doctor_Baby" FromRole="Baby" ToRole="Baby_Doctor" />
+          <NavigationProperty Name="Mother" Relationship="Self.FK_Baby_Mother1" FromRole="Baby" ToRole="Mother" />
+        </EntityType>
+        <EntityType Name="Baby_Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BabyId" Type="Int32" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Baby" Relationship="Self.FK_Baby_Doctor_Baby" FromRole="Baby_Doctor" ToRole="Baby" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Baby_Doctor_Doctor1" FromRole="Baby_Doctor" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Crm" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Specialty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Baby_Doctor" Relationship="Self.FK_Baby_Doctor_Doctor1" FromRole="Doctor" ToRole="Baby_Doctor" />
+        </EntityType>
+        <EntityType Name="Mother">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StreetName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HouseNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Baby" Relationship="Self.FK_Baby_Mother1" FromRole="Mother" ToRole="Baby" />
+        </EntityType>
+        <Association Name="FK_Baby_Doctor_Baby">
+          <End Role="Baby" Type="Self.Baby" Multiplicity="1" />
+          <End Role="Baby_Doctor" Type="Self.Baby_Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Baby">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Baby_Doctor">
+              <PropertyRef Name="BabyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Baby_Mother1">
+          <End Role="Mother" Type="Self.Mother" Multiplicity="1" />
+          <End Role="Baby" Type="Self.Baby" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mother">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Baby">
+              <PropertyRef Name="MotherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Baby_Doctor_Doctor1">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Baby_Doctor" Type="Self.Baby_Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Baby_Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MaternityEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Baby" EntityType="Self.Baby" />
+          <EntitySet Name="Baby_Doctor" EntityType="Self.Baby_Doctor" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" />
+          <EntitySet Name="Mother" EntityType="Self.Mother" />
+          <AssociationSet Name="FK_Baby_Doctor_Baby" Association="Self.FK_Baby_Doctor_Baby">
+            <End Role="Baby" EntitySet="Baby" />
+            <End Role="Baby_Doctor" EntitySet="Baby_Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Baby_Mother1" Association="Self.FK_Baby_Mother1">
+            <End Role="Mother" EntitySet="Mother" />
+            <End Role="Baby" EntitySet="Baby" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Baby_Doctor_Doctor1" Association="Self.FK_Baby_Doctor_Doctor1">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Baby_Doctor" EntitySet="Baby_Doctor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MaternityModelStoreContainer" CdmEntityContainer="MaternityEntities">
+          <EntitySetMapping Name="Baby">
+            <EntityTypeMapping TypeName="MaternityModel.Baby">
+              <MappingFragment StoreEntitySet="Baby">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="MotherId" ColumnName="MotherId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Baby_Doctor">
+            <EntityTypeMapping TypeName="MaternityModel.Baby_Doctor">
+              <MappingFragment StoreEntitySet="Baby_Doctor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BabyId" ColumnName="BabyId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctor">
+            <EntityTypeMapping TypeName="MaternityModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Crm" ColumnName="Crm" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Specialty" ColumnName="Specialty" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mother">
+            <EntityTypeMapping TypeName="MaternityModel.Mother">
+              <MappingFragment StoreEntitySet="Mother">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

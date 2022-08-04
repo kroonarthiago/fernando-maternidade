@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Listar medicos";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetDoctorPartialView", "Doctor")",
+        })
+        .done(function (response) {
+            debugger;
+            console.log("sucesso");
+            console.log(response);
+
+            $(".doctor-container").html(response);
+
+        })
+        .fail(function (error) {
+            debugger;
+            console.log("ocorreu erro");
+            console.log(error);
+        });
+    });
+</script>
+
+<h1>Doctors</h1>
+<p>@Html.ActionLink("Add", "AddUpdate", "Doctor", new { Id = "" }, new { @class = "btn btn-default" })</p>
+
+<div class="doctor-container">
+
+</div>
+
+

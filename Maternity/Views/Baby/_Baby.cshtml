@@ -1,0 +1,48 @@
+﻿@using Maternity.Models
+@model List<BabyModel>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#babyTable').DataTable();
+    });
+
+</script>
+
+<table class="table table" id="babyTable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>BirthDate</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Mother</th>
+            <th>Doctors</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Id</td>
+                <td>@m.Name</td>
+                <td>@m.BirthDate.ToShortDateString()</td>
+                <td>@m.Weight.ToString("F3")</td>
+                <td>@m.Height.ToString("F2")</td>
+                <td>@Html.ActionLink(m.MotherId.ToString(), "GetById", "Mother", new { Id = m.MotherId }, new { @class = "" })</td>
+                <td>
+                    @foreach (var i in m.DoctorList)
+                    {
+                        @Html.ActionLink(i.ToString(), "GetById", "Doctor", new { Id = i }, new { @class = "" })
+                        <span>&nbsp;</span>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "AddUpdate", "Baby", new { Id = m.Id }, new { @class = "btn btn-default" }) &nbsp; &nbsp;
+                    @Html.ActionLink("Remove", "Remove", "Baby", new { Id = m.Id }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

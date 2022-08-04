@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Listar Mothers";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetMotherPartialView", "Mother")",
+        })
+        .done(function (response) {
+            debugger;
+            console.log("sucesso");
+            console.log(response);
+
+            $(".mother-container").html(response);
+
+        })
+        .fail(function (error) {
+            debugger;
+            console.log("ocorreu erro");
+            console.log(error);
+        });
+    });
+</script>
+
+<h1>Maes</h1>
+<p>@Html.ActionLink("Add", "AddUpdate", "Mother", new { Id = "" }, new { @class = "btn btn-default" })</p>
+
+<div class="mother-container">
+
+</div>
+
+

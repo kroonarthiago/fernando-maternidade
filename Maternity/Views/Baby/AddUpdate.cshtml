@@ -1,0 +1,55 @@
+﻿@using Maternity.Models
+@model BabyModel
+@{
+    ViewBag.Title = "AddUpdate";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#babyDate").datepicker();
+        $(".date").mask("00/00/0000", { placeholder: "__/__/____" });
+        $(".weigth").mask("#,000", { placeholder: "_,___", reverse: true });
+        $(".heigth").mask("#,00", { placeholder: "_,__" , reverse: true });
+
+    });
+
+</script>
+
+<h2>AddUpdate</h2>
+
+@using (Html.BeginForm("AddUpdate", "Baby", FormMethod.Post))
+{
+    <h4>Baby</h4>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Name:</label>
+            @Html.TextBoxFor(m => Model.Name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">BirthDate:</label>
+            @Html.TextBoxFor(m => Model.BirthDate, new { @class = "form-control date" , @id="babyDate"})
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">Weight:</label>
+            @Html.TextBoxFor(m => Model.Weight , "{0:F3}",  new { @class = "form-control weigth" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">Height:</label>
+            @Html.TextBoxFor(m => Model.Height, "{0:F2}", new { @class = "form-control heigth" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">MotherId:</label>
+            @Html.TextBoxFor(m => Model.MotherId, new { @class = "form-control" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-default" />
+    </div>
+}
+<p>@Html.ActionLink("Go back", "Index", "Baby")</p>

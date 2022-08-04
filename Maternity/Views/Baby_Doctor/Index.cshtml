@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Listar baby_doctor";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetBaby_DoctorPartialView", "Baby_Doctor")",
+        })
+        .done(function (response) {
+            debugger;
+            console.log("sucesso");
+            console.log(response);
+
+            $(".baby_doctor-container").html(response);
+
+        })
+        .fail(function (error) {
+            debugger;
+            console.log("ocorreu erro");
+            console.log(error);
+        });
+    });
+</script>
+
+<h1>Baby_Doctor</h1>
+<p>@Html.ActionLink("Add", "AddUpdate", "Baby_Doctor", new { Id = "" }, new { @class = "btn btn-default" })</p>
+
+<div class="baby_doctor-container">
+
+</div>
+
+

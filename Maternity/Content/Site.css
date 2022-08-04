@@ -1,0 +1,92 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: rgb(40,40,40);
+    color: white;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top {
+    background-color: black;
+}
+
+.jumbotron {
+    background-color: rgb(230,100,0);
+    color: black;
+}
+
+
+/*barra de navegaçao*/
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: rgb(230,100,0);
+}
+
+.nav.navbar-nav li a {
+    color: white;
+}
+
+    .nav.navbar-nav li a:hover {
+        color: rgb(230,100,0);
+    }
+
+/*butoes*/
+
+.btn.btn-default {
+    background-color: rgb(230,100,0);
+    color: rgb(0,0,0);
+    border: 0;
+}
+
+    .btn.btn-default:focus {
+        outline: 0;
+    }
+
+    .btn.btn-default:hover {
+        background-color: rgb(255,120,0);
+        color: rgb(0,0,0);
+    }
+
+    .btn.btn-default:active {
+        background-color: rgb(255,120,0);
+        color: rgb(0,0,0);
+        outline: 0;
+    }
+
+
+/*formulario*/
+.form-control {
+    background-color: hsla(0,0%,100%,0.2);
+    color: white;
+}
+
+    .form-control:focus {
+        border: 3px solid rgb(240,110,0);
+        background-color: rgb(40,40,40)
+    }
+
+
+/*DataTable*/

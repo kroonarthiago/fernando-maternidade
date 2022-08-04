@@ -1,0 +1,66 @@
+﻿@using Maternity.Models
+@model MotherModel
+@{
+    ViewBag.Title = "AddUpdate";
+}
+
+<script type="text/javascript">
+
+    const options = {
+        onKeyPress: function (phone, e, field, options) {
+            const masks = ['(00) 00000-0000', '(00) 0000-0000#'];
+            console.log(phone.length);
+            const mask = (phone.length > 14) ? masks[0] : masks[1];
+            $('.phone').mask(mask, options);
+        },
+        placeholder: "(__) ____-____"
+    };
+
+    $(document).ready(function () {
+        $("#motherDate").datepicker();
+        $("#motherDate").mask("00/00/0000", { placeholder: "__/__/____" });
+        $(".phone").mask('(00) 0000-0000#', options);
+    });
+
+</script>
+
+
+<h2>AddUpdate</h2>
+
+@using (Html.BeginForm("AddUpdate", "Mother", FormMethod.Post))
+{
+
+    <h4>Mother</h4>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Name:</label>
+            @Html.TextBoxFor(m => Model.Name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">BirthDate:</label>
+            @Html.TextBoxFor(m => Model.BirthDate, new { @class = "form-control" ,@id = "motherDate" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">Phone:</label>
+            @Html.TextBoxFor(m => Model.Phone, new { @class = "form-control phone" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">StreetName:</label>
+            @Html.TextBoxFor(m => Model.StreetName, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">HouseNumber:</label>
+            @Html.TextBoxFor(m => Model.HouseNumber, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-default" />
+    </div>
+
+}
+<p>@Html.ActionLink("Go back", "Index", "Mother")</p>

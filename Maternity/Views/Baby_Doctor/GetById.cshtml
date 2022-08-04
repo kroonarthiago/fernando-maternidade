@@ -1,0 +1,38 @@
+﻿@using Maternity.Models
+@model Baby_DoctorModel
+@{
+    ViewBag.Title = "GetById ";
+}
+
+
+@if (Model.Id == -1)
+{
+    <h2>Not Found</h2>
+}
+else
+{
+    <h1>Baby_Doctor</h1>
+    <h3>Id = @Model.Id</h3>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Baby Id</th>
+                <th>Doctor Id</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Html.ActionLink(Model.BabyId.ToString(), "GetById", "Baby", new { Id = Model.BabyId }, new { @class = "" })</td>
+                <td>@Html.ActionLink(Model.DoctorId.ToString(), "GetById", "Doctor", new { Id = Model.DoctorId }, new { @class = "" })</td>
+                <td>
+                    @Html.ActionLink("Edit", "AddUpdate", "Baby_Doctor", new { Id = Model.Id }, new { @class = "btn btn-default" }) &nbsp;
+                    @Html.ActionLink("Remove", "Remove", "Baby_Doctor", new { Id = Model.Id }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

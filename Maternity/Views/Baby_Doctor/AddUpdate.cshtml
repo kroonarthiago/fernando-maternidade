@@ -1,0 +1,30 @@
+﻿@using Maternity.Models
+@model Baby_DoctorModel
+@{
+    ViewBag.Title = "AddUpdate";
+}
+
+<h2>AddUpdate</h2>
+
+
+@using (Html.BeginForm("AddUpdate", "Baby_Doctor", FormMethod.Post))
+{
+    <h4>Baby_Doctor</h4>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Baby Id:</label>
+            @Html.TextBoxFor(m => Model.BabyId, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">Doctor Id:</label>
+            @Html.TextBoxFor(m => Model.DoctorId, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-default" />
+    </div>
+
+}
+<p>@Html.ActionLink("Go back", "Index", "Baby_Doctor")</p>

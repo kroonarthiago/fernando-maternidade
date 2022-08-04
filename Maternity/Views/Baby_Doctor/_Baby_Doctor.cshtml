@@ -1,0 +1,34 @@
+﻿@using Maternity.Models
+@model List<Baby_DoctorModel>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#baby_doctorTable').DataTable();
+    });
+
+</script>
+
+<table class="table table" id="baby_doctorTable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Baby Id</th>
+            <th>Doctor Id</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Id</td>
+                <td>@Html.ActionLink(m.BabyId.ToString(), "GetById", "Baby", new { Id = m.BabyId }, new { @class = "" })</td>
+                <td>@Html.ActionLink(m.DoctorId.ToString(), "GetById", "Doctor", new { Id = m.DoctorId }, new { @class = "" })</td>
+                <td>
+                    @Html.ActionLink("Edit", "AddUpdate", "Baby_Doctor", new { Id = m.Id }, new { @class = "btn btn-default" }) &nbsp;
+                    @Html.ActionLink("Remove", "Remove", "Baby_Doctor", new { Id = m.Id }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Listar bebes";
+}
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetBabyPartialView", "Baby")",
+        })
+        .done(function (response) {
+            debugger;
+            console.log("sucesso");
+            console.log(response);
+
+            $(".baby-container").html(response);
+
+        })
+        .fail(function (error) {
+            debugger;
+            console.log("ocorreu erro");
+            console.log(error);
+        });
+
+
+ 
+
+    });
+</script>
+
+
+
+<h1>Baby</h1>
+<p>@Html.ActionLink("Add", "AddUpdate", "Baby", new { Id = "" }, new { @class = "btn btn-default" })</p>
+
+<div class="baby-container">
+
+</div>
